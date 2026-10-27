@@ -1,80 +1,66 @@
-```
-██████  ██████  ██  ██  █████     ██    █████    ████        ████   ██████   ████   ██  ██  █████   ██████  ██████  ██  ██
-██        ██    ██ ██   ██  ██   ████   ██  ██  ██  ██      ██      ██      ██      ██  ██  ██  ██    ██      ██    ██  ██
-██████    ██    ████    █████   ██  ██  ██  ██  ██  ██       ████   █████   ██      ██  ██  █████     ██      ██     ████
-██        ██    ██ ██   ██  ██  ██████  ██  ██  ██  ██          ██  ██      ██      ██  ██  ██  ██    ██      ██      ██
-██      ██████  ██  ██  ██  ██  ██  ██  █████    ████       █████   ██████   ████    ████   ██  ██  ██████    ██      ██
-```
+# 🟡🟢 Fikrado Security
 
-# Fikrado Security
+> Cross-platform **terminal-only** security suite — malware scan & removal, network discovery, server hardening audit, Active Directory checks, and AI-assisted detection.  
+> Zero runtime dependencies. Runs on **Linux, macOS, and Windows** with prebuilt standalone binaries.
 
-**Cross-platform terminal security suite — malware removal, network discovery, server hardening and Active Directory checks, with optional AI-assisted analysis.**
+<div align="center">
 
-Pure Node.js. **Zero runtime dependencies.** Runs on Linux, macOS and Windows, with prebuilt standalone binaries and an npm package.
+[![GitHub release](https://img.shields.io/github/v/release/fikrado2/fikrado-security-cli?include_prereleases&label=latest&color=yellow)](https://github.com/fikrado2/fikrado-security-cli/releases/latest)
+[![GitHub tag](https://img.shields.io/github/tag/fikrado2/fikrado-security-cli?color=lightgreen)](https://github.com/fikrado2/fikrado-security-cli/tags)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Node.js](https://img.shields.io/badge/Node.js-%E2%89%A516-green?logo=node.js)](https://nodejs.org/)
+[![Platforms](https://img.shields.io/badge/platform-linux%20|%20macos%20|%20windows-yellowgreen)](https://github.com/fikrado2/fikrado-security-cli/releases)
+[![OpenRouter](https://img.shields.io/badge/AI-OpenRouter-yellow?logo=openrouter)](https://openrouter.ai/)
+[![OpenAI](https://img.shields.io/badge/AI-OpenAI-lightgreen?logo=openai)](https://platform.openai.com/)
+[![OpenCode](https://img.shields.io/badge/AI-OpenCode-blue)](https://opencode.ai/)
 
-> This is the **terminal (CLI) edition**. The Windows desktop GUI edition lives at [fikrado2/fikrado-security](https://github.com/fikrado2/fikrado-security).
-
-```
-┌─ FIKRADO SECURITY ───────────────────────────────────────────────────┐
- [1] ☣ Full system scan      [5] ▦ Active Directory audit
- [2] ☣ Malware scan          [6] ✦ AI detection settings
- [3] ◈ Network scan          [7] ▤ Reports
- [4] ▤ Server / host audit   [8] ? About
- [0] ✕ Exit
-└──────────────────────────────────────────────────────────────────────┘
-```
+</div>
 
 ---
 
-## Contents
+## 🎬 Preview
 
-- [What it does](#what-it-does)
-- [Install](#install)
-- [Quick start](#quick-start)
-- [CLI reference](#cli-reference)
-- [AI detection](#ai-detection)
-- [Reports, quarantine & data](#reports-quarantine--data)
-- [Exit codes](#exit-codes)
-- [Build standalone binaries](#build-standalone-binaries)
-- [Development](#development)
-- [Safety & legal](#safety--legal)
-- [License](#license)
+### Startup banner
+
+The animated **FIKRADO SECURITY** ASCII banner in yellow + light green, followed by the interactive terminal menu:
+
+<img src="assets/screenshots/banner.png" width="700" alt="Fikrado Security startup banner — animated FIKRADO SECURITY ASCII art in yellow and light green" />
+
+### Interactive menu
+
+Full terminal UI with colors, spinners, progress bars, and tables:
+
+<img src="assets/screenshots/menu.png" width="700" alt="Fikrado Security interactive menu — malware, network, server, AD, AI settings, reports" />
 
 ---
 
-## What it does
+## ⚡ Features
 
-| Engine | What it checks | Typical use |
-|---|---|---|
-| **Malware** | 19 built-in signature families + filename heuristics: EICAR, obfuscated PHP/ASP/JSP webshells, reverse shells, encoded PowerShell, Mimikatz/Meterpreter artifacts, crypto-miners, `.htaccess` auto-prepend, autorun worms, obfuscated JS. Quarantine, restore or permanently delete findings. | Compromised web servers, shared hosting, suspicious downloads |
-| **Network** | Local subnet discovery, cross-platform ping sweep (64 parallel probes), TCP scan of 48 service ports, severity-ranked risk flags (Telnet, SMB, RDP, Redis, MongoDB, Elasticsearch, Docker API, memcached, TR-069…), deep scan of a single host (ports 1–1024 + services). | Network hygiene, exposed service discovery |
-| **Server / host** | Linux: SSH root/password login, `/etc/shadow` perms, UID-0 accounts, empty passwords, world-writable `/etc`, SUID inventory, firewall, fail2ban, auto-updates, reboot pending, **`/etc/ld.so.preload` rootkit check**, **suspicious cron download-and-execute**, SSH `authorized_keys`.<br>Windows: Defender, firewall profiles, UAC, RDP, Guest, SMBv1, PowerShell policy.<br>macOS: application firewall, FileVault, SIP, Gatekeeper, remote login. | Server hardening baseline, PCI/CIS-style triage |
-| **Active Directory** | DC discovery via DNS SRV (`_ldap._tcp.dc._msdcs`), Kerberos/LDAP/LDAPS/GC/SMB posture, and a **real anonymous LDAP bind probe** (raw BER, no libraries) to detect anonymous directory access. | AD hygiene, DC exposure review |
-| **AI detection** | Sends findings/reports to any OpenAI-compatible endpoint — **OpenRouter, OpenAI, OpenCode Zen, or custom** (Groq, Together, Ollama, LM Studio) — and returns classification, risk, and recommended action. | Second opinion on false positives, executive summaries |
+| 🟡 Engine | What it does |
+|-----------|-------------|
+| **🛡️ Malware scanner** | 19 built-in signature families + filename heuristics: EICAR test file, obfuscated PHP/ASP/JSP webshells, reverse shells, encoded PowerShell, Mimikatz/Meterpreter artifacts, crypto-miners, `.htaccess` auto-prepend, autorun worms, obfuscated JS. Quarantine, restore, or permanently delete findings. |
+| **🌐 Network scanner** | Subnet discovery, cross-platform ping sweep (64 parallel probes), TCP scan of 48 service ports, severity-ranked risk flags (Telnet, SMB, RDP, Redis, MongoDB, Elasticsearch, Docker API, memcached, TR-069…), deep port scan of a single host (1–1024). |
+| **🖥️ Server / host audit** | Linux: SSH root/password login, `/etc/shadow` perms, UID-0 accounts, empty passwords, world-writable `/etc`, SUID inventory, firewall, fail2ban, auto-updates, `ld.so.preload` rootkit check, suspicious cron, `authorized_keys`.<br>Windows: Defender, firewall profiles, UAC, RDP, Guest, SMBv1, PowerShell policy.<br>macOS: application firewall, FileVault, SIP, Gatekeeper, remote login. |
+| **🏢 Active Directory audit** | DC discovery via DNS SRV (`_ldap._tcp.dc._msdcs`), Kerberos/LDAP/LDAPS/GC/SMB posture, and a **real anonymous LDAP bind probe** (raw BER, zero dependencies) to detect anonymous directory access. |
+| **🤖 AI detection** | Sends findings/reports to any OpenAI-compatible endpoint — **OpenRouter, OpenAI, OpenCode Zen, or custom** (Groq, Ollama, LM Studio, Together…) — returns classification, risk, and recommended action. Optional; you opt in per scan. |
 
 Everything is **read-only** except the malware actions you explicitly request (quarantine or delete).
 
 ---
 
-## Install
+## 📦 Install
 
-### Option A — prebuilt binary (no Node.js needed)
+### Option A — Prebuilt standalone binary (no Node.js needed)
 
-**One-line install (Linux / macOS):**
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/fikrado2/fikrado-security-cli/main/install.sh | bash
-```
-
-Or download the file for your OS from the [Releases](https://github.com/fikrado2/fikrado-security-cli/releases) page:
+Download the file for your OS from the **[Releases](https://github.com/fikrado2/fikrado-security-cli/releases)** page:
 
 | Platform | File |
-|---|---|
-| Linux x86_64 | `fikrado-linux-x64` |
-| Linux ARM64 | `fikrado-linux-arm64` |
-| macOS Intel | `fikrado-macos-x64` |
-| macOS Apple Silicon | `fikrado-macos-arm64` |
-| Windows x64 | `fikrado-win-x64.exe` |
+|----------|------|
+| 🐧 Linux x86_64 | `fikrado-linux-x64` |
+| 🐧 Linux ARM64 | `fikrado-linux-arm64` |
+| 🍎 macOS Intel | `fikrado-macos-x64` |
+| 🍎 macOS Apple Silicon | `fikrado-macos-arm64` |
+| 🪟 Windows x64 | `fikrado-win-x64.exe` |
 
 ```bash
 # Linux / macOS
@@ -88,12 +74,20 @@ fikrado
 .\fikrado-win-x64.exe
 ```
 
-> macOS may refuse an unsigned binary downloaded from the internet. Clear the quarantine flag once:
+> 🍎 macOS may block an unsigned binary. Clear the quarantine flag once:
 > `xattr -d com.apple.quarantine ./fikrado-macos-arm64 && chmod +x ./fikrado-macos-arm64`
 >
-> Windows SmartScreen may warn about an unsigned binary — choose **More info → Run anyway**.
+> 🪟 Windows SmartScreen may warn — choose **More info → Run anyway**.
 
-### Option B — from source (requires Node.js ≥ 16)
+### One-line installer (Linux / macOS)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/fikrado2/fikrado-security-cli/main/install.sh | bash
+```
+
+Installs to `~/.local/bin/fikrado` (override with `FIKRADO_PREFIX`).
+
+### Option B — From source (requires Node.js ≥ 16)
 
 ```bash
 git clone https://github.com/fikrado2/fikrado-security-cli.git
@@ -101,19 +95,17 @@ cd fikrado-security
 node bin/fikrado.js          # no npm install needed to run
 ```
 
-> **npm:** the package is not yet published to the npm registry. Use the binary or source options above. To run from a clone without installing globally, `node bin/fikrado.js` works directly.
+> 📦 npm: the package is not yet published to the npm registry. Use the binary or source options above.
 
 ---
 
-## Quick start
+## 🚀 Quick start
 
-Run it with no arguments for the animated menu:
+Run with no arguments for the animated menu:
 
 ```bash
 fikrado
 ```
-
-On start you get the animated **FIKRADO SECURITY** banner (yellow + light green), a short boot sequence, then the menu. Colors, spinners and the banner animation are disabled automatically when output is piped or `NO_COLOR` is set.
 
 Common one-liners:
 
@@ -134,15 +126,15 @@ fikrado report show 1                         # print a report
 
 ---
 
-## CLI reference
+## 🎛️ CLI reference
 
 ```
-fikrado                          interactive menu
+fikrado                          interactive menu (banner + animated UI)
 fikrado scan [path] [--delete|--quarantine] [--ai] [--no-report]
 fikrado net [cidr] [--deep <host>] [--ai] [--no-report] [--yes]
 fikrado server [--ai] [--no-report]
 fikrado ad <domain> [--ai] [--no-report]
-fikrado full
+fikrado full                       # host audit + malware + network
 fikrado quarantine [list|restore <n>]
 
 fikrado keys                     interactive AI settings
@@ -160,13 +152,13 @@ fikrado --banner [--static] | --help | --version
 **Flags**
 
 | Flag | Meaning |
-|---|---|
-| `--ai` | Send the results to the active AI provider for analysis |
+|------|---------|
+| `--ai` | Send results to the active AI provider for analysis |
 | `--delete` | Permanently delete detected malware (scan only) |
 | `--quarantine` | Move detected malware into quarantine (scan only) |
 | `--no-report` | Do not write a report file |
 | `--deep <host>` | Full port scan of one host (net only) |
-| `--yes` | Skip the confirmation for subnets larger than /24 |
+| `--yes` | Skip confirmation for subnets larger than /24 |
 | `--no-anim` | Disable animations |
 | `NO_COLOR=1` | Disable colors |
 
@@ -174,22 +166,22 @@ Providers: `openrouter` · `openai` · `opencode` · `custom`
 
 ---
 
-## AI detection
+## 🤖 AI detection
 
-AI analysis is optional and entirely local-first: results are only sent to the provider you configure, and only when you ask for it (`--ai` or the `Analyze with AI?` prompt).
+AI analysis is optional and local-first: data is only sent to the provider you configure, and only when you ask (`--ai` or the *Analyze with AI?* prompt).
 
 ### Add a key
 
 ```bash
 fikrado keys set openrouter sk-or-v1-...      # https://openrouter.ai/keys
 fikrado keys set openai sk-...                # https://platform.openai.com/api-keys
-fikrado keys set opencode <your-zen-key>      # OpenCode Zen
+fikrado keys set opencode <zen-key>           # OpenCode Zen
 fikrado keys set custom <key>                 # any OpenAI-compatible endpoint
 ```
 
-Or use the interactive menu: **6 → provider → Set API key** (input is hidden).
+Or from the interactive menu: **6 → provider → Set API key** (input is hidden).
 
-The first provider you configure becomes active. Manage it with:
+Manage providers:
 
 ```bash
 fikrado keys list
@@ -199,18 +191,11 @@ fikrado keys base custom http://localhost:11434/v1
 fikrado keys off                              # disable AI completely
 ```
 
-### Notes per provider
-
-- **OpenRouter** — default model `openrouter/auto`, extra `HTTP-Referer`/`X-Title` headers are sent.
-- **OpenAI** — default model `gpt-4o-mini`.
-- **OpenCode Zen** — the preset points at `https://opencode.ai/zen/v1` with model `codeshell`. Depending on your account, set the exact model/base URL with `fikrado keys model` / `fikrado keys base`.
-- **Custom** — anything that speaks `POST /chat/completions` (Ollama: `http://localhost:11434/v1`, LM Studio, Groq, Together…). A local Ollama needs no real key but the field must be non-empty.
-
-Keys are stored **only** on your machine in `~/.fikrado/config.json` with mode `0600`. They are never sent anywhere except the provider you configured.
+Keys are stored **only** on your machine in `~/.fikrado/config.json` (mode `0600`). They are never sent anywhere except the provider you configured.
 
 ---
 
-## Reports, quarantine & data
+## 📁 Reports, quarantine & data
 
 Everything lives under `~/.fikrado/`:
 
@@ -226,20 +211,21 @@ Everything lives under `~/.fikrado/`:
 
 ```json
 [
-  { "id": "MY.RULE", "name": "My rule", "severity": "high", "pattern": "eval\\s*\\(\\s*base64_decode", "flags": "i" }
+  { "id": "MY.RULE", "name": "My rule", "severity": "high",
+    "pattern": "eval\\s*\\(\\s*base64_decode", "flags": "i" }
 ]
 ```
 
-**Quarantine** — files are moved (not copied) into `~/.fikrado/quarantine/` and recorded in `manifest.json` with original path, matched signatures and timestamp. Restore with `fikrado quarantine restore <n>` or from the menu. Quarantined files are **not** executed or scanned again.
+**Quarantine** — files are moved (not copied) into `~/.fikrado/quarantine/` and recorded in `manifest.json` with original path, matched signatures, and timestamp. Restore with `fikrado quarantine restore <n>`. Quarantined files are not executed or re-scanned.
 
-**Reports** — every scan writes a human-readable `.txt` and a machine-readable `.json` with host, platform, user, duration and findings. Use `--no-report` to skip.
+**Reports** — every scan writes a human-readable `.txt` and a machine-readable `.json` with host, platform, user, duration, and findings. Use `--no-report` to skip.
 
 ---
 
-## Exit codes
+## 🚪 Exit codes
 
 | Code | Meaning |
-|---|---|
+|------|---------|
 | `0` | Success, nothing wrong found |
 | `1` | Usage error / runtime failure |
 | `2` | Findings: malware detected (`scan`) or failing checks (`server`) |
@@ -253,14 +239,11 @@ fikrado scan /var/www --delete --no-report || echo "FIKRADO: threats handled"
 
 ---
 
-## Build standalone binaries
+## 🔨 Build standalone binaries
 
 ```bash
 npm install                 # dev dependency: @yao-pkg/pkg
 npm run build               # all platforms → dist/
-npm run build:linux
-npm run build:mac
-npm run build:win
 ```
 
 Output (plus `dist/SHA256SUMS.txt`):
@@ -283,10 +266,10 @@ git tag v1.0.0 && git push origin v1.0.0
 
 ---
 
-## Development
+## 🛠️ Development
 
 ```bash
-npm test              # 23 tests, Node's built-in runner, no test dependencies
+npm test              # 23 tests, Node's built-in runner
 npm start             # run from source
 npm run banner        # render the banner only
 ```
@@ -306,22 +289,30 @@ test/                     unit + integration tests
 scripts/build-binaries.js standalone binary builder
 ```
 
-Adding a signature is one object in `BUILT_IN_SIGNATURES` (`lib/scanners/malware.js`) or a line in `~/.fikrado/signatures.json`. Adding a host check is one `check(...)` entry in `lib/scanners/server.js`.
-
 ---
 
-## Safety & legal
+## ⚠️ Safety & legal
 
 - Use Fikrado Security **only on systems you own or are explicitly authorized to test**. Port-scanning or auditing networks without permission can be illegal.
-- The malware engine is **signature-based**, not a replacement for a full antivirus/EDR. It is tuned for webshells, droppers, reverse shells, miners and common post-exploitation artifacts.
-- `--delete` is irreversible. Prefer `--quarantine` (default in the interactive menu) when unsure.
-- Some host checks need root/administrator to read `/etc/shadow`, firewall state or registry keys; without it they report `info`/`skip` instead of failing.
+- The malware engine is **signature-based**, not a replacement for a full antivirus/EDR. It is tuned for webshells, droppers, reverse shells, miners, and common post-exploitation artifacts.
+- `--delete` is irreversible. Prefer `--quarantine` when unsure.
+- Some host checks need root/administrator to read `/etc/shadow`, firewall state, or registry keys; without it they report `info`/`skip` instead of failing.
 - AI analysis sends finding metadata (file names, signature IDs, short snippets) to your chosen provider. Do not enable it on data you cannot share.
 
 ---
 
-## License
+## 📄 License
 
 MIT — see [LICENSE](LICENSE).
 
-Built by [fikrado2](https://github.com/fikrado2). Stay secure. 🟡🟢
+---
+
+<div align="center">
+
+**Built by [fikrado2](https://github.com/fikrado2)** — Stay secure. 🟡🟢
+
+[![GitHub stars](https://img.shields.io/github/stars/fikrado2/fikrado-security-cli?style=social)](https://github.com/fikrado2/fikrado-security-cli/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/fikrado2/fikrado-security-cli?style=social)](https://github.com/fikrado2/fikrado-security-cli/network/members)
+[![GitHub watchers](https://img.shields.io/github/watchers/fikrado2/fikrado-security-cli?style=social)](https://github.com/fikrado2/fikrado-security-cli/watchers)
+
+</div>
