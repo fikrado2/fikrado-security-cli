@@ -40,7 +40,7 @@ jobs:
         shell: bash
 
       - name: Unit + integration tests
-        run: node --test test/
+        run: node --test 'test/*.js'
         shell: bash
 
       # Scans an empty temp dir on purpose: the repo's test fixtures contain the

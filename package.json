@@ -13,7 +13,7 @@
   },
   "scripts": {
     "start": "node bin/fikrado.js",
-    "test": "node --test test/",
+    "test": "node --test 'test/*.js'",
     "banner": "node bin/fikrado.js --banner",
     "build": "node scripts/build-binaries.js",
     "build:linux": "node scripts/build-binaries.js linux",

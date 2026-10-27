@@ -24,7 +24,7 @@ jobs:
         run: npm install --no-audit --no-fund
 
       - name: Test before shipping
-        run: node --test test/
+        run: node --test 'test/*.js'
 
       - name: Build linux + macOS + windows executables
         run: node scripts/build-binaries.js
