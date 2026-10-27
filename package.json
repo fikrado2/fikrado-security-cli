@@ -1,0 +1,48 @@
+{
+  "name": "fikrado-security",
+  "version": "1.0.0",
+  "description": "Fikrado Security — cross-platform terminal security suite (Node.js): malware scan & removal, network scan, server audit, Active Directory checks, AI-assisted detection (OpenRouter / OpenAI / OpenCode / custom).",
+  "bin": {
+    "fikrado": "bin/fikrado.js",
+    "fikrado-security": "bin/fikrado.js"
+  },
+  "preferGlobal": true,
+  "type": "commonjs",
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "start": "node bin/fikrado.js",
+    "test": "node --test test/",
+    "banner": "node bin/fikrado.js --banner",
+    "build": "node scripts/build-binaries.js",
+    "build:linux": "node scripts/build-binaries.js linux",
+    "build:mac": "node scripts/build-binaries.js macos",
+    "build:win": "node scripts/build-binaries.js win"
+  },
+  "devDependencies": {
+    "@yao-pkg/pkg": "^6.24.0"
+  },
+  "license": "MIT",
+  "keywords": [
+    "security",
+    "scanner",
+    "malware",
+    "antivirus",
+    "network",
+    "active-directory",
+    "audit",
+    "cli",
+    "terminal",
+    "ai",
+    "openrouter",
+    "openai",
+    "opencode"
+  ],
+  "files": [
+    "bin/**",
+    "lib/**",
+    "README.md",
+    "LICENSE"
+  ]
+}

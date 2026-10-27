@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: test (${{ matrix.os }} · node ${{ matrix.node }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        node: [20, 22, 24]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Syntax check
+        run: |
+          node --check bin/fikrado.js
+          node --check lib/menu.js
+          node --check lib/ui.js
+          node --check lib/config.js
+          node --check lib/ai.js
+          node --check lib/report.js
+          node --check lib/scanners/malware.js
+          node --check lib/scanners/network.js
+          node --check lib/scanners/server.js
+          node --check lib/scanners/ad.js
+        shell: bash
+
+      - name: Unit + integration tests
+        run: node --test test/
+        shell: bash
+
+      - name: CLI smoke test
+        run: |
+          node bin/fikrado.js --version
+          node bin/fikrado.js --help
+          node bin/fikrado.js keys list
+          node bin/fikrado.js scan test --no-report
+        shell: bash

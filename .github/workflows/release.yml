@@ -1,0 +1,50 @@
+name: Release binaries
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: build standalone binaries
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install build dependency
+        run: npm install --no-audit --no-fund
+
+      - name: Test before shipping
+        run: node --test test/
+
+      - name: Build linux + macOS + windows executables
+        run: node scripts/build-binaries.js
+
+      - name: Show build output
+        run: ls -lh dist/
+
+      - name: Create / update GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Fikrado Security ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+          files: |
+            dist/fikrado-linux-x64
+            dist/fikrado-linux-arm64
+            dist/fikrado-macos-x64
+            dist/fikrado-macos-arm64
+            dist/fikrado-win-x64.exe
+            dist/SHA256SUMS.txt
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
