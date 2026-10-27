@@ -43,10 +43,18 @@ jobs:
         run: node --test test/
         shell: bash
 
+      # Scans an empty temp dir on purpose: the repo's test fixtures contain the
+      # EICAR string and webshell snippets, so scanning `test/` would correctly
+      # report threats and exit non-zero.
       - name: CLI smoke test
         run: |
           node bin/fikrado.js --version
           node bin/fikrado.js --help
           node bin/fikrado.js keys list
-          node bin/fikrado.js scan test --no-report
+          node bin/fikrado.js report list
+          node bin/fikrado.js quarantine list
+
+          CLEAN_DIR="$(mktemp -d)"
+          node bin/fikrado.js scan "$CLEAN_DIR" --no-report
+          rm -rf "$CLEAN_DIR"
         shell: bash

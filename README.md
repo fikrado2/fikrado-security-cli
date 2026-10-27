@@ -47,7 +47,7 @@ Pure Node.js. **Zero runtime dependencies.** Runs on Linux, macOS and Windows, w
 | Engine | What it checks | Typical use |
 |---|---|---|
 | **Malware** | 19 built-in signature families + filename heuristics: EICAR, obfuscated PHP/ASP/JSP webshells, reverse shells, encoded PowerShell, Mimikatz/Meterpreter artifacts, crypto-miners, `.htaccess` auto-prepend, autorun worms, obfuscated JS. Quarantine, restore or permanently delete findings. | Compromised web servers, shared hosting, suspicious downloads |
-| **Network** | Local subnet discovery, cross-platform ping sweep (64 parallel probes), TCP scan of ~44 service ports, severity-ranked risk flags (Telnet, SMB, RDP, Redis, MongoDB, Elasticsearch, Docker API, memcached, TR-069…), deep scan of a single host (ports 1–1024 + services). | Network hygiene, exposed service discovery |
+| **Network** | Local subnet discovery, cross-platform ping sweep (64 parallel probes), TCP scan of 48 service ports, severity-ranked risk flags (Telnet, SMB, RDP, Redis, MongoDB, Elasticsearch, Docker API, memcached, TR-069…), deep scan of a single host (ports 1–1024 + services). | Network hygiene, exposed service discovery |
 | **Server / host** | Linux: SSH root/password login, `/etc/shadow` perms, UID-0 accounts, empty passwords, world-writable `/etc`, SUID inventory, firewall, fail2ban, auto-updates, reboot pending, **`/etc/ld.so.preload` rootkit check**, **suspicious cron download-and-execute**, SSH `authorized_keys`.<br>Windows: Defender, firewall profiles, UAC, RDP, Guest, SMBv1, PowerShell policy.<br>macOS: application firewall, FileVault, SIP, Gatekeeper, remote login. | Server hardening baseline, PCI/CIS-style triage |
 | **Active Directory** | DC discovery via DNS SRV (`_ldap._tcp.dc._msdcs`), Kerberos/LDAP/LDAPS/GC/SMB posture, and a **real anonymous LDAP bind probe** (raw BER, no libraries) to detect anonymous directory access. | AD hygiene, DC exposure review |
 | **AI detection** | Sends findings/reports to any OpenAI-compatible endpoint — **OpenRouter, OpenAI, OpenCode Zen, or custom** (Groq, Together, Ollama, LM Studio) — and returns classification, risk, and recommended action. | Second opinion on false positives, executive summaries |
@@ -93,20 +93,15 @@ fikrado
 >
 > Windows SmartScreen may warn about an unsigned binary — choose **More info → Run anyway**.
 
-### Option B — npm (requires Node.js ≥ 16)
-
-```bash
-npm install -g fikrado-security
-fikrado
-```
-
-### Option C — from source
+### Option B — from source (requires Node.js ≥ 16)
 
 ```bash
 git clone https://github.com/fikrado2/fikrado-security-cli.git
 cd fikrado-security
 node bin/fikrado.js          # no npm install needed to run
 ```
+
+> **npm:** the package is not yet published to the npm registry. Use the binary or source options above. To run from a clone without installing globally, `node bin/fikrado.js` works directly.
 
 ---
 

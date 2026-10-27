@@ -77,6 +77,7 @@ async function main() {
           '--target', job.target,
           '--output', outFile,
           '--compress', 'GZip',
+          '--fallback-to-source',
         ]);
         if (process.platform !== 'win32') fs.chmodSync(outFile, 0o755);
         const size = fs.statSync(outFile).size;
